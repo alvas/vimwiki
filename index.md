@@ -1,6 +1,6 @@
 # Note
 
-## linux
+## [linux](linux)
 
 **memory region layouts**
 *[memory](memory)*
