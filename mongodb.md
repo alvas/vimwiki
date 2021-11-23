@@ -1,4 +1,4 @@
-| RDBMS       | MongoDB                                         |
+[|](|) RDBMS       | MongoDB                                         |
 | ---         | ---                                             |
 | Database    | Database                                        |
 | Table       | Collection                                      |
@@ -12,5 +12,13 @@
 * help: db.help()
 
 * statistics: db.stats()
+
+* create database: use mydb
+
+* to check current selected db: db
+
+* to check db list: show dbs
+
+* insert one document to db: db.movie.insert({"name": "tutorials [points](poits)"})
 
 
