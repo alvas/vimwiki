@@ -1,4 +1,4 @@
-[|](|) RDBMS       | MongoDB                                         |
+| RDBMS       | MongoDB                                         |
 | ---         | ---                                             |
 | Database    | Database                                        |
 | Table       | Collection                                      |
