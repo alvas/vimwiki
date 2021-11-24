@@ -1,18 +1,4 @@
-# IPC
+# [script](script.md)
 
-## Pipes and FIFOs(named pipes)
+# [kernel](kernel.md)
 
-## System V IPC
-* synchronize by semaphores
-* send messages
-* share a memory area
-
-### Semaphores
-
-### Messages
-
-### Shared memory regions
-
-## Sockets
-
-## POSIX Message Queues
