@@ -4,13 +4,13 @@
 
 ## [mongodb](mongodb.md)
 
-## [memcached](memcached)
+## [memcached](memcached.md)
 
-## [redis](redis)
+## [redis](redis.md)
 
-## [postgresql](postgresql)
+## [postgresql](postgresql.md)
 
-## [sqlite](sqlite)
+## [sqlite](sqlite.md)
 
-## [machine_learning](machine_learning)
+## [machine_learning](machine_learning.md)
 
