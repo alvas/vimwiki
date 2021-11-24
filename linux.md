@@ -2,12 +2,17 @@
 
 ## Pipes and FIFOs(named pipes)
 
-## Semaphores
+## System V IPC
+* synchronize by semaphores
+* send messages
+* share a memory area
 
-## Messages
+### Semaphores
 
-## Shared memory regions
+### Messages
+
+### Shared memory regions
 
 ## Sockets
 
-
+## POSIX Message Queues

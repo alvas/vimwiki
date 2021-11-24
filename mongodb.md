@@ -13,7 +13,7 @@
 
 * statistics: db.stats()
 
-* create database: use mydb
+* to create/use database: use mydb
 
 * to check current selected db: db
 
@@ -29,6 +29,8 @@
     >db.createCollection("mycol", {capped: true, autoIndexId: true, size: 6142800, max: 10000})
     >db.tutorialspoint.insert({"name": "tutorialspoint"})
 
+* to check collection list: show collections
+ 
 * to drop collection: db.collection.drop()
     >db.mycollection.drop()
 
