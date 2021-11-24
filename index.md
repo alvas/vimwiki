@@ -1,10 +1,8 @@
 # Note
 
-## [linux](linux)
+## [linux](linux.md)
 
-[linux](linux.md)
-
-## [mongodb](mongodb)
+## [mongodb](mongodb.md)
 
 ## [memcached](memcached)
 
