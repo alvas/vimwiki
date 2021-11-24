@@ -21,4 +21,8 @@
 
 * insert one document to db: db.movie.insert({"name": "tutorials [points](poits)"})
 
+* to delete a db: db.dropDatabase()
+
+* to create collection: db.createCollection(name, options)
+
 
