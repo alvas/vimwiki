@@ -34,5 +34,34 @@
 * to drop collection: db.collection.drop()
     >db.mycollection.drop()
 
+* _id: ObjectId(4 bytes timestamp, 3 bytes machine id, 2 bytes process id, 3 bytes incrementer)
+
+* datatype
+    - string
+    - integer
+    - boolean
+    - double
+    - min/max keys
+    - arrays
+    - timestamp
+    - object
+    - null
+    - symbol
+    - date
+    - object id
+    - binary data
+    - code
+    - regular expression
+
+
+* to insert document: 
+db.post.insert({
+title: 'MongoDB Overview', 
+description: 'MongoDB is no sql database',
+by: 'tutorials point',
+url: 'http://www.tutorialspoint.com',
+tags: ['mongodb', 'database', 'NoSQL'],
+likes: 100
+})
 
 
