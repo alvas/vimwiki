@@ -68,4 +68,46 @@ likes: 100
 * another way to insert document:
 >db.post.save(document)
 
+* to query data from collection:
+>db.mycol.find.pretty()
+
+* to return only one document from query:
+>db.mycol.findOne().pretty()
+
+* RDBMS Where Clause Equivalents in MongoDB
+    - Equality, db.mycol.find({"by": "tutorials point"}).pretty() 
+    - Less Than, db.mycol.find({"likes": {$lt:50}}).pretty() 
+    - Less Than Equals, db.mycol.find({"likes": {$lte:50}}).pretty() 
+    - Greater Than, db.mycol.find({"likes": {$gt:50}}).pretty() 
+    - Greater Than Equals, db.mycol.find({"likes": {$gte:50}}).pretty() 
+    - Not Equals, db.mycol.find({"likes": {$ne:50}}).pretty()
+
+* AND
+>db.mycol.find({$and:[{"by":"tutorials point"},{"title": "MongoDB Overview"}]}).pretty()
+
+* OR
+>db.mycol.find({$or:[{"by":"tutorials point"},{"title": "MongoDB Overview"}]}).pretty()
+
+* AND and OR together
+>db.mycol.find({"likes": {$$gt:10}, $$or: [{"by": "tutorials point"}, {"title": "MongoDB Overview"}]}).pretty()
+
+* to update document, update() updates the values in the existing document 
+>db.mycol.update({'title':'MongoDB Overview'},{$set:{'title':'New MongoDB Tutorial'}})
+
+* to update multiple documents:
+>db.mycol.update({'title':'MongoDB Overview'}, {$set:{'title':'New MongoDB Tutorial'}},{multi:true})
+
+* save() replaces the existing document with the document passed in save() method
+>db.mycol.save({ "_id" : ObjectId(5983548781331adf45ec5), "title":"Tutorials Point New Topic", "by":"Tutorials Point" })
+
+* to delete document:
+>db.mycol.remove({'title':'MongoDB Overview'})
+
+* to remove only one:
+>db.mycol.remove({'title':'MongoDB Overview'}, 1)
+
+* remove all documents:
+>db.mycol.remove({})
+
+* projection means selecting only the necessary data rather than selecting whole of the data of a document:
 
