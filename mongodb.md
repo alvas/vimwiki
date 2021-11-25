@@ -24,15 +24,15 @@
 * to delete a db: db.dropDatabase()
 
 * to create collection: db.createCollection(name, options)
-    >use test
-    >db.createCollection("mycollection")
-    >db.createCollection("mycol", {capped: true, autoIndexId: true, size: 6142800, max: 10000})
-    >db.tutorialspoint.insert({"name": "tutorialspoint"})
+>use test
+>db.createCollection("mycollection")
+>db.createCollection("mycol", {capped: true, autoIndexId: true, size: 6142800, max: 10000})
+>db.tutorialspoint.insert({"name": "tutorialspoint"})
 
 * to check collection list: show collections
  
 * to drop collection: db.collection.drop()
-    >db.mycollection.drop()
+>db.mycollection.drop()
 
 * _id: ObjectId(4 bytes timestamp, 3 bytes machine id, 2 bytes process id, 3 bytes incrementer)
 
@@ -55,13 +55,17 @@
 
 
 * to insert document: 
-    >db.post.insert({
-    title: 'MongoDB Overview', 
-    description: 'MongoDB is no sql database',
-    by: 'tutorials point',
-    url: 'http://www.tutorialspoint.com',
-    tags: ['mongodb', 'database', 'NoSQL'],
-    likes: 100
-    })
+>db.post.insert({
+title: 'MongoDB Overview', 
+description: 'MongoDB is no sql database',
+by: 'tutorials point',
+url: 'http://www.tutorialspoint.com',
+tags: ['mongodb', 'database', 'NoSQL'],
+likes: 100
+})
+
+
+* another way to insert document:
+>db.post.save(document)
 
 
