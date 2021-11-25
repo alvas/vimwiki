@@ -55,13 +55,13 @@
 
 
 * to insert document: 
-db.post.insert({
-title: 'MongoDB Overview', 
-description: 'MongoDB is no sql database',
-by: 'tutorials point',
-url: 'http://www.tutorialspoint.com',
-tags: ['mongodb', 'database', 'NoSQL'],
-likes: 100
-})
+    >db.post.insert({
+    title: 'MongoDB Overview', 
+    description: 'MongoDB is no sql database',
+    by: 'tutorials point',
+    url: 'http://www.tutorialspoint.com',
+    tags: ['mongodb', 'database', 'NoSQL'],
+    likes: 100
+    })
 
 
