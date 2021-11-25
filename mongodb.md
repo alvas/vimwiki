@@ -89,7 +89,9 @@ likes: 100
 >db.mycol.find({$or:[{"by":"tutorials point"},{"title": "MongoDB Overview"}]}).pretty()
 
 * AND and OR together
->db.mycol.find({"likes": {$$gt:10}, $$or: [{"by": "tutorials point"}, {"title": "MongoDB Overview"}]}).pretty()
+```
+db.mycol.find({"likes": {$gt:10}, $or: [{"by": "tutorials point"}, {"title": "MongoDB Overview"}]}).pretty()
+```
 
 * to update document, update() updates the values in the existing document 
 >db.mycol.update({'title':'MongoDB Overview'},{$set:{'title':'New MongoDB Tutorial'}})
@@ -110,4 +112,36 @@ likes: 100
 >db.mycol.remove({})
 
 * projection means selecting only the necessary data rather than selecting whole of the data of a document:
+>db.mycol.find({},{"title":1,_id:0})
+
+* to limit records returning from query:
+>db.mycol.find({},{"title":1,_id:0}).limit(2)
+
+* to skip first n records returning from query:
+>db.mycol.find({},{"title":1,_id:0}).limit(1).skip(1)
+
+* to sort query:
+>db.mycol.find({},{"title":1,_id:0}).sort({"title":-1})
+
+* to create index:
+>db.mycol.ensureIndex({"title":1})
+
+* to create index on multiple fields:
+>db.mycol.ensureIndex({"title":1,"description":-1})
+
+* Aggregation operations group values from multiple documents together, and can perform a variety of operations on the grouped data to return a single result. In SQL count(*) and with group by is an equivalent of mongodb aggregation:
+```
+db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : 1}}}])
+```
+
+    + aggregation expressions:
+        - $sum
+        ```
+        db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {sum : "$likes"}}})
+        ```
+        - $avg
+        ```
+        db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$avg : "$likes"}}}])
+        ```
+
 
