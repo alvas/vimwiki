@@ -134,14 +134,14 @@ db.mycol.find({"likes": {$gt:10}, $or: [{"by": "tutorials point"}, {"title": "Mo
 db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : 1}}}])
 ```
 
-    + aggregation expressions:
-        - $sum
-        ```
-        db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {sum : "$likes"}}})
-        ```
-        - $avg
-        ```
-        db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$avg : "$likes"}}}])
-        ```
++ aggregation expressions:
+    - $sum
+    ```
+    db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {sum : "$likes"}}})
+    ```
+    - $avg
+    ```
+    db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$avg : "$likes"}}}])
+    ```
 
 
