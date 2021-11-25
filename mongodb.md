@@ -9,25 +9,34 @@
 
 * to use mongodb: mongo
 
+
 * help: db.help()
+
 
 * statistics: db.stats()
 
+
 * to create/use database: use mydb
+
 
 * to check current selected db: db
 
+
 * to check db list: show dbs
+
 
 * insert one document to db: db.movie.insert({"name": "tutorials [points](poits)"})
 
+
 * to delete a db: db.dropDatabase()
+
 
 * to create collection: db.createCollection(name, options)
 >use test
 >db.createCollection("mycollection")
 >db.createCollection("mycol", {capped: true, autoIndexId: true, size: 6142800, max: 10000})
 >db.tutorialspoint.insert({"name": "tutorialspoint"})
+
 
 * to check collection list: show collections
  
@@ -68,11 +77,14 @@ likes: 100
 * another way to insert document:
 >db.post.save(document)
 
+
 * to query data from collection:
 >db.mycol.find.pretty()
 
+
 * to return only one document from query:
 >db.mycol.findOne().pretty()
+
 
 * RDBMS Where Clause Equivalents in MongoDB
     - Equality, db.mycol.find({"by": "tutorials point"}).pretty() 
@@ -82,57 +94,74 @@ likes: 100
     - Greater Than Equals, db.mycol.find({"likes": {$gte:50}}).pretty() 
     - Not Equals, db.mycol.find({"likes": {$ne:50}}).pretty()
 
+
 * AND
 >db.mycol.find({$and:[{"by":"tutorials point"},{"title": "MongoDB Overview"}]}).pretty()
 
+
 * OR
 >db.mycol.find({$or:[{"by":"tutorials point"},{"title": "MongoDB Overview"}]}).pretty()
+
 
 * AND and OR together
 ```
 db.mycol.find({"likes": {$gt:10}, $or: [{"by": "tutorials point"}, {"title": "MongoDB Overview"}]}).pretty()
 ```
 
+
 * to update document, update() updates the values in the existing document 
 >db.mycol.update({'title':'MongoDB Overview'},{$set:{'title':'New MongoDB Tutorial'}})
+
 
 * to update multiple documents:
 >db.mycol.update({'title':'MongoDB Overview'}, {$set:{'title':'New MongoDB Tutorial'}},{multi:true})
 
+
 * save() replaces the existing document with the document passed in save() method
 >db.mycol.save({ "_id" : ObjectId(5983548781331adf45ec5), "title":"Tutorials Point New Topic", "by":"Tutorials Point" })
+
 
 * to delete document:
 >db.mycol.remove({'title':'MongoDB Overview'})
 
+
 * to remove only one:
 >db.mycol.remove({'title':'MongoDB Overview'}, 1)
+
 
 * remove all documents:
 >db.mycol.remove({})
 
+
 * projection means selecting only the necessary data rather than selecting whole of the data of a document:
 >db.mycol.find({},{"title":1,_id:0})
+
 
 * to limit records returning from query:
 >db.mycol.find({},{"title":1,_id:0}).limit(2)
 
+
 * to skip first n records returning from query:
 >db.mycol.find({},{"title":1,_id:0}).limit(1).skip(1)
+
 
 * to sort query:
 >db.mycol.find({},{"title":1,_id:0}).sort({"title":-1})
 
+
 * to create index:
 >db.mycol.ensureIndex({"title":1})
 
+
 * to create index on multiple fields:
 >db.mycol.ensureIndex({"title":1,"description":-1})
+
 
 * Aggregation operations group values from multiple documents together, and can perform a variety of operations on the grouped data to return a single result. In SQL count(*) and with group by is an equivalent of mongodb aggregation:
 ```
 db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : 1}}}])
 ```
+
 
 + aggregation expressions:
     - $sum
@@ -143,5 +172,27 @@ db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : 1}}}])
     ```
     db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$avg : "$likes"}}}])
     ```
-
-
+    - $min
+    ```
+    db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$min : "$likes"}}}])
+    ```
+    - $max
+    ```
+    db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$max : "$likes"}}}])
+    ```
+    - $push, inserts the value to an array in the resulting document.
+    ```
+    db.mycol.aggregate([{$group : {_id : "$by_user", url : {$push: "$url"}}}])
+    ```
+    - $addToSet, inserts the value to an array in the resulting document but does not create duplicates.
+    ```
+    db.mycol.aggregate([{$group : {_id : "$by_user", url : {$addToSet : "$url"}}}])
+    ```
+    - $first, gets the first document from the source documents according to the grouping. 
+    ```
+    db.mycol.aggregate([{$group : {_id : "$by_user", first_url : {$first : "$url"}}}])
+    ```
+    - $last, gets the last document from the source documents according to the grouping.
+    ```
+    db.mycol.aggregate([{$group : {_id : "$by_user", last_url : {$last : "$url"}}}])
+    ```
