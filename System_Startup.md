@@ -1,4 +1,4 @@
-0xfffffff0 BIOS -> first sector(boot loader 1) 0x00007c00 -> (boot loader 2) 0x00096c00 -> first 512 bytes of the kernel 0x00090000 -> setup() 0x00090200 -> reset of kernel image 0x00100000 -> startup_32() decompress kernel -> startup_32() setup process 0 execution environment -> start_kernel()
+BIOS 0xfffffff0 -> first sector(boot loader 1) 0x00007c00 -> (boot loader 2) 0x00096c00 -> first 512 bytes of the kernel 0x00090000 -> setup() 0x00090200 -> reset of kernel image 0x00100000 -> startup_32() decompress kernel -> startup_32() setup process 0 execution environment -> start_kernel()
 
 # BIOS
 to begin the boot, a speical hardware circuit raises the logical value of the RESET pin of the CPU. After RESET is asserted, some registers of the process(including cs and eip) are set to fixed values, and the code found at physical address 0xfffffff0 is executed.
@@ -7,11 +7,11 @@ A real mode address is composed of a seg segment and an off offset; the correspo
 
 1. execute Power-On Self-Test(POST). The boostrap code in an ACPI-compliant BIOS builds several tables that describe the hardware devices present in the system.
 2. initializes the hardware devices.
-3. search for an operating system to boot. the first sector(boot sector)
+3. search for an operating system to boot. The first sector(boot sector)
 4. As soon as a valid device is found, it copies the contents of its first sector into RAM, starting from physical address 0x00007c00, and then jumps into that address and executes the code just loaded.
 
 # Boot Loader
-The boot lader is the program invoked by the BIOS to load the image of an operating system kernel into RAM.
+The boot loader is the program invoked by the BIOS to load the image of an operating system kernel into RAM.
 
 The first sector of the hard disk, name the Master Boot Record(MBR), includes the partition table and a small program, which loads the first sector of the partition containing the operating system to be started.
 
