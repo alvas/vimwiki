@@ -196,3 +196,26 @@ db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : 1}}}])
     ```
     db.mycol.aggregate([{$group : {_id : "$by_user", last_url : {$last : "$url"}}}])
     ```
+    
+    
+* There is a set of possible stages and each of those is taken as a set of documents as an input and produces a resulting set of documents 
+    - $project
+    - $match
+    - group
+    - $sort
+    - $skip
+    - $limit
+    - $unwind
+
+
+* setup a replica set
+$mongod --port 27017 --dbpath "/var/lib/mongodb" --replSet rs0
+
+    + in Mongo client, issue the command rs.initiate() to initiate a new replica set
+    + to check replica set configuration, issue the command rs.conf()
+    + to check the status of replica set, issue the command rs.status()
+
+
+
+
+
