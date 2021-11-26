@@ -5,6 +5,7 @@ rmmod
 
 modprobe
 
+depmod
 
 * files:
 /lib/modules
