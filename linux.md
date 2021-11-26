@@ -1,6 +1,6 @@
 # [script](script.md)
 
-# [System Startup](System Startup.md)
+# [System_Startup](System_Startup.md)
 
 # IPC
 
