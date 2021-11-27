@@ -1,20 +1,10 @@
-# [script](script.md)
+# [Script](script.md)
 
-# [process](process.md)
+# [Process](process.md)
 
-# IPC
+# [IPC](IPC.md)
 
-## Pipes and FIFOs(named pipes)
-
-## Semaphores
-
-## Messages
-
-## Shared memory regions
-
-## Sockets
-
-# [kernel](kernel.md)
+# [Kernel](kernel.md)
 
 # [System_Startup](System_Startup.md)
 

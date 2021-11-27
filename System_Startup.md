@@ -37,6 +37,6 @@ The code of the setup() assembly language function has been placed by the linker
 * time_init()
 * kmem_cache_init()
 * calibrate_delay()
-* kernel_thread()
+* kernel_thread() -> kernel_clone()
 
 
