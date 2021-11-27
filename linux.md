@@ -1,5 +1,7 @@
 # [script](script.md)
 
+# [process](process.md)
+
 # IPC
 
 ## Pipes and FIFOs(named pipes)

@@ -199,6 +199,7 @@ db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : 1}}}])
     
     
 * There is a set of possible stages and each of those is taken as a set of documents as an input and produces a resulting set of documents 
+```
     - $project
     - $match
     - group
@@ -207,15 +208,44 @@ db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : 1}}}])
     - $limit
     - $unwind
 
+```
+
 
 * setup a replica set
-$mongod --port 27017 --dbpath "/var/lib/mongodb" --replSet rs0
+$mongod --port 27017 --dbpath "/var/lib/mongodb" --replSet rs0 --quiet
 
     + in Mongo client, issue the command rs.initiate() to initiate a new replica set
     + to check replica set configuration, issue the command rs.conf()
     + to check the status of replica set, issue the command rs.status()
 
 
+* to add member to replica set:
+>rs.add("192.168.1.51:27017")
+
+
+* to create backup:
+$mongodump
+
+
+* to restore from backup:
+$mongorestore
+
+
+* deployment
+    + mongostat
+    + mongotop
+
+
+* relationship
+Relationships in MongoDB represent how various documents are logically related to each other. Relationships can be modeled via Embedded and Referenced approaches. Such relationships can be either 1:1, 1:N, N:1 or N:N.
+
+
+* references
+    + DBRefs 
+        - $ref
+        - $id
+        - $db
+    + Manual References
 
 
 
