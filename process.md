@@ -1,15 +1,15 @@
 kernel/fork.c
 
 SYSCALL_DEFINE0(fork) -> kernel_clone() -> copy_process() ->dup_task_struct()
-                                                          ->copy_flags()
-                                                          ->alloc_pid()
+
+copy_process() ->alloc_pid()
                                                           
 
 fs/exec.c
 
 SYSCALL_DEFINE3(execve) -> do_execve() -> do_execveat_common()
 
-[kernel/exit.c](kernel/exit.c.md)
+kernel/exit.c
 
 SYSCALL_DEFINE1(exit) -> do_exit()
 
@@ -31,3 +31,5 @@ SYSCALL_DEFINE5(clone) -> kernel_clone()
 
 
 release_task()
+
+
