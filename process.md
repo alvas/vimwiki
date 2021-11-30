@@ -49,6 +49,6 @@ Chapter 20. Program ExZecution
 
 The layouts differ only the position of the memory regions for file memory mappings and anonymous mappings.
 
-[memorylayout.c](memorylayout.c.md)
+[memorylayout.c](memorylayout.c)
 
 

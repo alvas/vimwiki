@@ -16,9 +16,9 @@ The module dependency information is stored in the file /lib/modules/version/mod
 
 module_param(name, type, perm);
 
-[hello.c](hello.c.md)
+[hello.c](hello.c)
 
-[hello_makefile](hello_makefile.md)
+[hello_makefile](hello_makefile)
 
 $insmod hello.ko
 $rmmod hello
