@@ -1,4 +1,4 @@
-# Note
+[#](#.md) Note
 
 ## [linux](linux.md)
 
