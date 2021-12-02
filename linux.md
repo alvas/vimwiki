@@ -2,6 +2,12 @@
 
 # [Process](process.md)
 
+# [Memory](Memory.md)
+
+# [VFS](VFS.md)
+
+# [IO](IO.md)
+
 # [IPC](IPC.md)
 
 # [Kernel](kernel.md)
