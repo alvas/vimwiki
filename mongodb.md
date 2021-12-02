@@ -248,4 +248,101 @@ Relationships in MongoDB represent how various documents are logically related t
     + Manual References
 
 
+* covered query 
+>db.users.ensureIndex({gender:1,user_name:1})
+
+
+* analyzing quey 
+Analyzing queries is a very important aspect of measuring how effective the database and indexing design is. 
+
+>db.users.find({gender:"M"},{user_name:1,_id:0}).explain()
+
+>db.users.find({gender:"M"},{user_name:1,_id:0}).hint({gender:1,user_name:1})
+
+
+* atomic operation
+
+```
+>db.products.findAndModify({ 
+   query:{_id:2,product_available:{$gt:0}}, 
+   update:{ 
+      $inc:{product_available:-1}, 
+      $push:{product_bought_by:{customer:"rob",date:"9-Jan-2014"}} 
+   }    
+})
+```
+
+* advanced indexing
+```
+{
+   "address": {
+      "city": "Los Angeles",
+      "state": "California",
+      "pincode": "123"
+   },
+   "tags": [
+      "music",
+      "cricket",
+      "blogs"
+   ],
+   "name": "Tom Benzamin"
+}
+```
+
+* indexing array fields:
+ 
+>db.users.ensureIndex({"tags":1})
+>db.users.find({tags:"cricket"})
+
+* indexing sub-document fields:
+>db.users.ensureIndex({"address.city":1,"address.state":1,"address.pincode":1})
+>db.users.find({"address.city":"Los Angeles"})   
+
+
+* ObjectId
+An ObjectId is a 12-byte BSON type having the following structure:
++ The first 4 bytes representing the seconds since the unix epoch
++ The next 3 bytes are the machine identifier
++ The next 2 bytes consists of process id
++ The last 3 bytes are a random counter value
+
+
+* to generate a new ObjectId:
+>newObjectId = ObjectId()
+
+
+* to provide an ObjectId:
+>myObjectId = ObjectId("5349b4ddd2781d08c09890f4")
+
+
+* fetch creation time of a document:
+>ObjectId("5349b4ddd2781d08c09890f4").getTimestamp()
+
+
+* to convert ObjectId to string:
+>newObjectId.str
+
+
+* map reduce:
+```
+>db.collection.mapReduce(
+   function() {emit(key,value);},  //map function
+   function(key,values) {return reduceFunction}, {   //reduce function
+      out: collection,
+      query: document,
+      sort: document,
+      limit: number
+   }
+)
+
+>db.posts.mapReduce( 
+   function() { emit(this.user_id,1); }, 
+	
+   function(key, values) {return Array.sum(values)}, {  
+      query:{status:"active"},  
+      out:"post_total" 
+   }
+)
+```
+
 
