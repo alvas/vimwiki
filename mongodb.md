@@ -345,4 +345,58 @@ An ObjectId is a 12-byte BSON type having the following structure:
 )
 ```
 
+* text search
+```
+{
+   "post_text": "enjoy the mongodb articles on tutorialspoint",
+   "tags": [
+      "mongodb",
+      "tutorialspoint"
+   ]
+}
+```
+
+* to create text index on post_text field:
+>db.posts.ensureIndex({post_text:"text"})
+
+
+* to use text index:
+>db.posts.find({$text:{$search:"tutorialspoint"}})
+
+
+* to find name of text index:
+>db.posts.getIndexes()
+
+
+* to delete text index:
+>db.posts.dropIndex("post_text_text")
+
+
+* to use regex expression
+>db.posts.find({post_text:{$regex:"tutorialspoint"}})
+>db.posts.find({post_text:/tutorialspoint/})
+
+
+* to use regex expression with case insensitive
+>db.posts.find({post_text:{$regex:"tutorialspoint",$options:"$i"}})
+
+
+* to use regex expression for array element
+>db.posts.find({tags:{$regex:"tutorial"}})
+
+
+* to store an mp3 file using GridFS
+>mongofiles.exe -d gridfs put song.mp3
+
+gridfs is database name, song.mp3 is file name
+
+* to see file's document in database
+>db.fs.files.find()
+
+
+* to see fs.chunk of the file
+>db.fs.chunks.find({files_id:ObjectId('534a811bf8b4aa4d33fdf94d')})
+
+
+
 
