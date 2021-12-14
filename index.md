@@ -1,4 +1,4 @@
-[#](#.md) Note
+# Note
 
 ## [linux](linux.md)
 
@@ -13,6 +13,8 @@
 ## [sqlite](sqlite.md)
 
 ## [machine_learning](machine_learning.md)
+
+## [API](API)
 
 ## [interview](interview.md)
 
