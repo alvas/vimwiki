@@ -90,3 +90,81 @@ value
 * value − It is the data that needs to be stored. Data needs to be passed on new line after executing the command with the above options.
 
 
+## get command
+
+```
+get key
+```
+
+
+## get CAS data
+
+Memcached gets command is used to get the value with CAS token. If the key does not exist in Memcached, then it returns nothing.
+
+```
+gets key
+```
+
+
+## delete command
+
+```
+delete key [noreply]
+```
+
+
+## increment decrement data
+
+Memcached incr and decr commands are used to increment or decrement the numeric value of an existing key. If the key is not found, then it returns NOT_FOUND. If the key is not numeric, then it returns CLIENT_ERROR cannot increment or decrement non-numeric value. Otherwise, ERROR is returned.
+
+```
+incr key increment_value
+decr key decrement_value
+```
+
+
+## stats command
+
+Memcached stats command is used to return server statistics such as PID, version, connections, etc.
+
+```
+stats
+```
+
+
+## stats items command
+
+Memcached stats items command is used to get items statistics such as count, age, eviction, etc. organized by slabs ID.
+
+```
+stats items
+```
+
+
+## stats slabs command
+
+Memcached stats slabs command displays slabs statistics such as size, memory usage, commands, count etc. organized by slabs ID.
+
+```
+stats slabs
+```
+
+
+## stats sizes command
+
+Memcached stats sizes command provides information about the sizes and number of items of each size within the cache. The information is returned in two columns. The first column is the size of the item (rounded up to the nearest 32 byte boundary), and the second column is the count of the number of items of that size within the cache.
+
+```
+stats sizes
+```
+
+
+## clear data command
+
+Memcached flush_all command is used to delete all data (key-value pairs) from the Memcached server. It accepts an optional parameter called time that sets a time after which the Memcached data is to be cleared.
+
+```
+flush_all [time] [noreply]
+```
+
+
