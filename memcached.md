@@ -1,8 +1,11 @@
 * to start memcached
 $sudo systemctl start memcached
 
+* by default memcached is on port 11211
+
 * to start memcached on different port
 $memcached -p 11111 -U 11111 -u user -d
+$/usr/bin/memcached -m 64 -p 11211 -u memcache -l 127.0.0.1 -P /var/run/memcached/memcached.pid
 
 * to connect to a memcached server
 $telnet 192.168.1.54 11111
