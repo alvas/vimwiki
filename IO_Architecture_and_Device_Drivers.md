@@ -19,7 +19,78 @@ To prevent I/O port conflict, the kernel keeps track of I/O ports assigned to ea
 
 As a general rule, each node of the tree must correspond to a subrange of the range associated with the parent. The root of the I/O port resource tree(ioport_resource) spans the whole I/O address space(form port number 0 to 65535).
 
+The tree of all I/O addresses currently assigned to I/O devices can be obtained from the /proc/ioports file.
 
-![leana](https://drive.google.com/file/d/1HwTgn6UB4I3tfmjkv1wbHL0IptHSEnq9/view?usp=sharing)
+
+### I/O Interfaces
+
+An I/O interface is a hardware circuit inserted between a group of I/O ports and the corresponding device controller. It acts as an interpreter that translates the values in the I/O ports into commands and data for the device. In the opposite direction, it detects changes in the device state and correspondingly updates the I/O port that plays the role of status register. This circuit can also be connected through an IRQ line into a Programmable Interrupt Controller, so that it issues interrupt requests on behalf of the device.
+
+
+### The Device Driver Model
+
+
+#### The sysfs Filesystem
+
+The /proc filesystem was the first special filesystem designed to allow User Mode applications to access kernel internal data structures. The /sysfs filesystem has essentially the same objective, but it provides additional information on kernel data structures; furthermore, /sysfs is organized in a more structure way than /proc.
+
+A goal of the sysfs filesystem is to expose the hierarchical relationships among the components of the device driver model.
+
+Top-level directories of this filesystem:
++ block
++ devices
++ bus
++ drivers
++ class
++ power
++ firmware
+
+Relationships between components of the device driver models are expressed in the sysfs filesystem as symbolic links between directories and files. The main role of regular files in the sysfs filesystem is to represent attributes of drivers and devices.
+
+
+#### Kobjects
+
+The core data structure of the device driver model is a generic data structure named kobject{}, which is inherently tied to the sysfs filesystem: each kobject corresponds to a directory in that filesystem.
+
+A kset{} is a collection of kobjects of the same type. 
+
+Collections of ksets called subsystems. A subsystem may include ksets of different types, and it is represented by a subsystem{} data structure.
+
+The kobject_register() function initializes a kobject and adds the corresponding directory to the sysfs filesystem.
+
+The kobject_unregister() function removes a kobject's directory from the sysfs filesystem.
+
+Many kobject directories include regular files called attributes. The sysfs_create_file() function receive as its parameters the addresses of a kobject and an attribute descriptor, and creates the special file in the proper directory. Other relationships between the objects represented in the sysfs filesystem are established by means of symbolic links: the sysfs_create_link() function creates a symbolic link for a given kobject in a directory associated with another kobject.
+
+
+## Components of the Device Driver Model
+
+### Devices
+
+Each device in the device driver model is represented by a device{} object.
+
+### Buses
+
+
+### Drivers
+
+
+### Classes
+
+
+## Device Files
+
+
+
+## Character Device Drivers
+
+A character device driver is described by a cdev{} structure.
+
+The cdev_alloc() function allocates dynamically a cdev descriptor and initializes the embedded object so that the descriptor is automatically freed when the reference counter becomes zero.
+
+The cdev_add() function registers a cdev descriptor in the device driver model. The function initializes the dev and count fields of the cdev descriptor, and then invokes the kobj_map() function. This function sets up the device driver model's data structures that glue the interval of device numbers to the device driver descriptor.
+
+
+cdev{} vs char_device_struct{}
 
 
