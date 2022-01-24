@@ -72,6 +72,7 @@ Many kobject directories include regular files called attributes. The sysfs_crea
 
 ## Components of the Device Driver Model
 
+
 ### Devices
 
 Each device in the device driver model is represented by a device{} object.
@@ -102,7 +103,7 @@ I/O devices are treated as special files called device files.
 
 Network cards are a notable exception to this schema, because they are hardware devices that are not directly associated with device files. 
 
-A device file is usually a real file stored in a filesystem. Its inode doesn't need to include pointers to blocks of data on the disk(the file's data) because there are none. Instead the inode must include an identifier of the hardware device corresponding to the character or block device file. Traditionally, this identifier consists of the type of device file(character or block) and a pair of numbers. The first number, called the major number, identifies the device type. Traditionally, all device files that have the same major number and the same type share the same set of file oprations, because they are handled by the same device driver. The second number, called the minor number, identifies a specific device among a group of devices that share the same major number.
+A device file is usually a real file stored in a filesystem. Its inode doesn't need to include pointers to blocks of data on the disk(the file's data) because there are none. Instead the inode must include an identifier of the hardware device corresponding to the character or block device file. Traditionally, this identifier consists of the type of device file(character or block) and a pair of numbers. The first number, called the major number, identifies the device type. Traditionally, all device files that have the same major number and the same type share the same set of file operations, because they are handled by the same device driver. The second number, called the minor number, identifies a specific device among a group of devices that share the same major number.
 
 The mknod() system call is used to create device files. It receives the name of the device file, its type, and the major and minor numbers as its parameters. Device files are usually included in the /dev directory. 
 
@@ -143,3 +144,77 @@ The cdev_add() function registers a cdev descriptor in the device driver model. 
 cdev{} is driver; char_device_struct{} is device.
 
 
+### Block Device Drivers
+
+In general, each I/O operation involves a group of blocks that are adjacent on disk. Each I/O operation is represented by a "block I/O"(bio) structure, which collects all information needed by the lower components to satisfy the request.
+
+
+* The controllers of the hardware block devices transfer data in chunks of fixed length called "sectors". Therefore, the *I/O scheduler* and the *block device drivers* must manage *sectors* of data.
+* * The *Virtual Filesystem, the mapping layer, and the filesystems* group the disk data in logical units called "*blocks*". A block corresponds to the minimal disk storage unit inside a filesystem.
+* *Block device drivers* should be able to cope with "*segments*" of data: each segment is a memory page - or a portion of a memory page - including chunks of data that are physically adjacent on disk.
+* The *disk caches* work on "*pages*" of disk data, each of which fits in a page frame.
+* The *generic block layer* glues together all upper and lower components, thus it knows about *sectors, blocks, segments, and pages* of data.
+
+
+#### Sectors
+
+To achieve acceptable performance, **hard disks and similar devices** transfer several adjacent bytes at once. Each data transfer operation for a block device acts on a group of adjacent bytes called a sector. In most disk devices, the size of a sector is 512 bytes. Sector should be considered as the basic unit of data transfer. Sector indices are stored in 32- or 64-bit variables of type sector_t{}.
+
+
+#### Blocks
+
+The block is the basic unit of data transfer for the VFS and, consequently, for the filesytems. The block size is not specific to a block device. When creating a disk-based filesystem, the administrator may select the proper block size. Several partitions on the same disk might make sue of different block sizes. Each read or write operation issued on a block device file is a "raw" access that bypasses the disk-based filesyste; the kernel executes it by using blocks of largest size(4,096 bytes). Each block requires its own block buffer, which is a RAM memory area used by the kernel to store the block's content. The size of a block buffer always matches the size of the corresponding block. Each buffer has a "buffer head" descriptor of type buffer_head{}.
+
+
+#### Segments
+
+In almost all cases, the data transfer is directly performed by the disk controller with a DMA operation. The block device driver simply triggers the data transfer by sending suitable commands to the disk controller; once the data transfer is finished, the controller raises and interrupt to notify the block device driver. The data transferred by a single DMA operation must belong to sectors that are adjacent on disk. So-called scatter-gather DMA transfers: in each such operation, the data can be transfered from or to several noncontiguous memory areas. To make use of scatter-gather DMA operations, block device drivers must handle the data in units called segments. A segment is simply a memory page - or a port of a memory page - that includes the data of some adjacent disk sectors. Thus, a scatter-gather DMA operation may involve several segment at once.
+
+
+### The Generic Block Layer
+
+
+
+### The I/O Scheduler
+
+
+### Block Device Drivers
+
+#### Block Devices
+
+The block device driver must take care of all VFS system calls issued on the block device files associated with the corresponding block devices. 
+
+Each block device is represented by a block_device{} descriptor.
+
+All block device descriptors are inserted in a global list, whose head is represented by the all_bdevs variable; the pointers for list linkage are in the bd_list field of the block device descriptor. 
+
+The relationship between a major and minor number and the corresponding block device descriptor is maintained through the bdev special filesystem. 
+
+#### Device Driver Registration and Initialization
+
+register_blkdev(), device driver reserve a major number for its own purposes.
+
+alloc_disk(), allocates disk descriptor, allocates the array that stores the partition descriptors of the disk.
+
+The driver needs to register the IRQ line for the device:
+
+```
+request_irq(foo_irq, foo_interrupt, SA_INTERRUPT | SA_SHIRQ, "foo", NULL),
+```
+
+Registering and activating the disk:
+
+```
+add_disk(foo.gd);
+```
+
+add_disk(), receives as its parameter the address of the gendisk descriptor.
+
+
+### Opening a Block Device File
+
+The kernel opens a block device file every time that a filesystem is mounted over a disk or partition, every time that a swap partition is activated, and every time that a User Mode process issues an open() system call on a block device file. 
+
+The f_op field of the file object is set to the address of the def_blk_fops table. 
+
+The blkdev_open() method is invoked by the dentry_open().
