@@ -4,7 +4,7 @@ Representational State Transfer
 
 ## REST Constraints
 
-The idea of a RESTfull system is based on the conecpts of constraints that limit how a distributed system can be constructed.
+The idea of a RESTfull system is based on the concepts of constraints that limit how a distributed system can be constructed.
 
 * Client/Server
 * Stateless

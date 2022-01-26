@@ -30,8 +30,8 @@ An I/O interface is a hardware circuit inserted between a group of I/O ports and
 
 **Motor drivers vs Motor controllers(Practical Robotics in C++)**
 
-+ Motor drivers are the **circuitry** that handles supplying power to the motors based on their input signal.
 + Motor controllers are the **software and circuitry** that take an input signal about what the motor needs to be doing, and generates and output signal that goes to the motor drivers.
++ Motor drivers are the **circuitry** that handles supplying power to the motors based on their input signal.
 
 
 ### The Device Driver Model
@@ -129,8 +129,61 @@ When a device driver is being registered, the kernel looks for unsupported hardw
 
 Initializing a driver means allocating precious resources(IRQs page fames for DMA transfer buffers, DMA channel) of the system, which are therefore not available to other drivers.
 
+
+### Monitoring I/O Operations
+
+The device driver that started an I/O operation must rely on a monitoring technique that signals either the termination of the I/O operation or a time-out. In the case of a terminated operation, the device driver reads the status register of the I/O interface to determine whether the I/O operation was carried out successfully. 
+
+
+The two techniques available to monitor the end of an I/O operation are called the polling mode and the interrupt mode. 
+
+
+#### Polling mode
+
+#### Interrupt mode
+
+Interrupt mode can be used only if the I/O controller is capable of signaling, via an IRQ line, the end of an I/O operation.
+
+```
+ssize_t foo_read(struct file* filp, char* buf, size_t count, loff_t* ppos) {
+    foo_dev_t* foo_dev = filp->private_data;
+    
+    if (down_interruptible(&foo_dev->sem))
+        return -ERESTARTSYS;
+        
+    foo_dev->intr = 0;
+    outb(DEV_FOO_READ, DEV_FOO_CONTROL_PORT);
+    wait_event_interruptible(foo_dev->wait, (foo_dev->intr == 1));
+    
+    if (put_user(foo_dev->data, buf))
+        return -EFAULT;
+        
+    up(&foo_dev->sem);
+    return 1; 
+}
+
+
+irqreturn_t foo_interrupt(int irq, void* dev_id, struct pt_regs* regs) {
+    foo->data = inb(DEV_FOO_DATA_PORT);
+    foo->intr = 1;
+    wake_up_interruptible(&foo->wait);
+    return 1;
+}
+
+```
+
+
 ### Direct Memory Access(DMA)
 
+
+Nowaday all PCs include auxilliary DMA circuits, which can transfer data between the RAM and an I/O device.
+
+
+**Logical and Linear addresses**, which are used internally by the CPU.
+
+**Physical addresses**, which are the memory addresses used by the CPU to physically drive the data bus.
+
+**Bus address**, corresponds to the memory addresses used by all hardware devices except the CPU to drive the data bus.
 
 ## Character Device Drivers
 
@@ -144,6 +197,7 @@ The cdev_add() function registers a cdev descriptor in the device driver model. 
 cdev{} is driver; char_device_struct{} is device.
 
 
+<<<<<<< HEAD
 ### Block Device Drivers
 
 In general, each I/O operation involves a group of blocks that are adjacent on disk. Each I/O operation is represented by a "block I/O"(bio) structure, which collects all information needed by the lower components to satisfy the request.
@@ -270,3 +324,8 @@ The kernel opens a block device file every time that a filesystem is mounted ove
 The f_op field of the file object is set to the address of the def_blk_fops table. 
 
 The blkdev_open() method is invoked by the dentry_open().
+=======
+## Block Device Drivers
+
+
+>>>>>>> 8a03aa5 (add IO note)
