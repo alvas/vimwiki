@@ -328,4 +328,3 @@ The blkdev_open() method is invoked by the dentry_open().
 ## Block Device Drivers
 
 
->>>>>>> 8a03aa5 (add IO note)
