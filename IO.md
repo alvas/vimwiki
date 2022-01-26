@@ -173,9 +173,61 @@ In almost all cases, the data transfer is directly performed by the disk control
 
 ### The Generic Block Layer
 
+#### The Bio Structure
+
+The core data structure of the generic block layer is a descriptor of an ongoing I/O block device operation called bio{}. Each bio essentially includes an identifier for a disk storage area -- the initial sector number and the number of sectors included in the storage area -- and one or more segments describing the memory areas involved in the I/O operation. 
+
+Each segment in a bio is represetned by a bio_vec{} data structure.
+
+
+The contents of a bio descriptor keep changing during the block I/O operation. When the generic block layer starts a new I/O operation, it allocates a new bio structure by invoking the bio_alloc() function.
+
+
+#### Representing Disk and Disk partitions
+
+A disk is a logical block device that is handled by the generic block layer. A disk can be a virtual device built upon several physical disk partitions, or a storage area living in some dedicated pages of RAM. 
+
+A disk is represented by the gendisk{} object. 
+
+The fops field of the gendisk object points to a block_device_operations table: open(), release(), ioctl(), compat_ioctl(), media_changed(), revalidate_disk()
+
+Hard disks are commonly split into logical partitions. Each block device file may represent either a whole disk or a partition inside the disk.
+
+If a disk is split in partitions, their layout is kept in an array of hd_struct{} structures whose address is stored in the part field of the gendisk object.
+
+When the kernel discovers a new disk in the system, it invokes the alloc_disk() function, which allocates and initializes a new gendisk object and, if the new disk is split in several partitions, a suitable array of hd_struct descriptors. Then, it invokes the add_disk() function to insert the new gendisk descriptor into the data structures of the generic block layer.
+
+#### Submitting a Request
+
+bio_alloc() to allocate a new bio descriptor. The kernel invokes the generic_make_request() which is the main entry point of the generic block layer. 
+
+
+#### Request Descriptors
+
+Each pending request for a block device is represented by a request{}. Each request consists of one or more bio structures. 
 
 
 ### The I/O Scheduler
+
+When a kernel component wishes to read or write some disk data, it actually creates a block device request. The generic block layer invokes the I/O scheduler to create a new block device request or to enlarge an already existing one and then terminates. Each block device driver maintains its own request queue, which contains the list of pending requests for the device. If the disk controller is handling several disks, there is sually one request queue for each physical block device. 
+
+#### Request Queue Descriptors
+
+Each request queue is represented by means of a large request_queue{}. 
+
+
+#### Activating the Block Device Driver
+
+The delay activation of the block device driver is accomplished through a technique know as device plugging and unplugging. As long as block device driver is plugged, the device driver is not activated even if there are requests to be processed in the driver's queues.
+
+The blk_plug_device() function plugs a block device -- or more precisely, a request queue serviced by some block device driver.
+
+The blk_remove_plug() function unplugs a request queue.
+
+
+#### I/O Scheduling Algorithms
+
+To change the I/O scheduler used in the master disk of the first IDE channel, the administrator can write an elevator name into the /sys/block/hda/queue/scheduler file of the sysfs special filesystem. 
 
 
 ### Block Device Drivers
