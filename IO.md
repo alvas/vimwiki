@@ -298,7 +298,18 @@ The relationship between a major and minor number and the corresponding block de
 
 #### Device Driver Registration and Initialization
 
-register_blkdev(), device driver reserve a major number for its own purposes.
+The device driver needs a custom descriptor foo of type foo_dev_t holding the data required to driver the hardware device.
+
+```
+struct foo_dev_t {
+    ...
+    spinlock_t lock;
+    struct gendisk *gd;
+    ...
+}
+```
+
+register_blkdev(), device driver reserve a major number for its own purposes. Include a new item in the list of registered major numbers in the /proc/devices special file.
 
 alloc_disk(), allocates disk descriptor, allocates the array that stores the partition descriptors of the disk.
 
@@ -324,7 +335,5 @@ The kernel opens a block device file every time that a filesystem is mounted ove
 The f_op field of the file object is set to the address of the def_blk_fops table. 
 
 The blkdev_open() method is invoked by the dentry_open().
-=======
-## Block Device Drivers
 
 
