@@ -10,3 +10,82 @@ Filesystems  supported by the VFS may be grouped into three main classes:
 * Special filesystems
 
 The root directory is contained in the root filesystem, which in Linux, is usually of type Ext2 or Ext3. All other filesystems can be "mounted" on subdirectories of the root filesystem. A useful feature of Linux's VFS allows it to handle virtual block devices such as /dev/loop0, which may be used to mount filesystems stored in regular files. 
+
+
+The common file model consists of the following object types:
+
+* The superblock object
+Stores information concerning a mounted filesystem. For disk-based filesystems, this object usually corresponds to a filesystem control block stored on disk.
+
+* The inode object
+Stores general information about a specific file. For disk-based filesystems, this object usually corresponds to a file control block stored on disk. Each inode object is associated with an inode number, which uniquely identifies the file within the filesystem.
+
+* The file object
+Stores information about the interaction between an open file and a process. This information exists only in kernel memory during the period when a process has the file open.
+
+* The dentry object
+Stores information about the linking of a directory entry(a particular name of the file) with the corresponding file. Each disk-based filesystem stores this information in its own particular way on disk.
+
+
+The most recently used dentry objects are contained in a disk cache named the dentry cache, which speeds up the translation from a file pathname to the inode of the last pathname component. A disk cache is a software mechanism that allows the kernel to keep in RAM some information that is normally stored on a disk, so that further accesses to that data can be quickly satisfied without a slow access to the disk itself.
+
+Disk cache is different from hardware cache or memory cache. A hardware cache is a fast static RAM that speeds up requests directed to the slower dynamic RAM. A memory cache is a software mechanism introduced to bypass the Kernel Memory Allocator.
+
+
+### System Calls Handled by the VFS
+
+mount(), umount(), umount2(), mount/unmount filesystems
+
+sysfs(), get filesystem information
+
+statfs(), fstatfs(), stafs64(), fstatfs64(), ustat(), get filesystem statistics
+
+chroot(), pivot_root(), change root directory
+
+chdir(), fchdir(), getcwd() manipulate current directory
+
+mkdir(), rmdir(), create and destroy directories
+
+getdents(), getdents64(), readdir(), link(), ulink(), rename(), lookup_dcookie(), manipulate directory entries
+
+readlink(), symlink(), manipulate soft links
+
+chown(), fchown(), lchown(), chown16(), fchown16(), lchown16(), modify file owner
+
+chmod(), fchmod(), utime(), modify file attributes
+
+stat(), fstat(), lstat(), access(), oldstat(), oldfstat(), oldlstat(), stat64(), lstat64(), fstat64(), read file systus
+
+open(), close(), creat(), umask(), open, close and create files
+
+dup(), dup2(), fcntl(), fcntl64(), manipulate file descriptors
+
+select(), poll(), wait for events on a set of file descriptors
+
+truncate(), ftruncate(), truncate64(), ftruncate64(), change file size
+
+lseek(), _llseek(), change file pointer
+
+read(), write(), readv(), writev(), sendfile(), sendfile64(), readahead(), carry out file I/O operations
+
+io_setup(), io_submit(), io_getevents(), io_cancel(), io_dentroy(), asynchronous I/O(allows multiple outstanding read and write requests)
+
+pread64(), pwrite64(), seek file and  access it
+
+mmap(), mmap2(), munmap(), madvise(), mincore(), remap_file_pages(), handle file memory mapping
+
+fdatasync(), fsync(), sync(), msync(), synchronize file data
+
+flock(), manipulate file lock
+
+setxattr(), lsetxattr(), fsetxattr(), getxattr(), lgetxattr(), fgetxattr(), listxattr(), llistxattr(), flistxattr(), removexattr(), lremovexattr(), fremovexattr(), manipulate file extended attributes
+
+
+## VFS Data Structures
+
+
+### Superblock Objects
+
+A superblock object consists of a super_block{} structure.
+
+
