@@ -77,6 +77,8 @@ snowflake id generator: 0(1 bit) + timestamp(41 bits) + datacenter id(5 bits) + 
 1070 Accounts Merge
 1396 Set Union
 434 Nmber of Island II
+431 Connected Component in Undirected Graph
+432 Find the Weak Connected Component in the Directed Graph
 559 Trie Service
 629 Minimum Spanning Tree
 805 Maximum Association Set
@@ -84,10 +86,9 @@ snowflake id generator: 0(1 bit) + timestamp(41 bits) + datacenter id(5 bits) + 
 473 Add and Search Word - Data structure design
 132 Word Search II
 477 Surrunded Regions
-432 Find the Weak Connected Component in the Directed Graph
-431 Connected Component in Undirected Graph
 635 Boggle Game
 634 Word Squares
+
 
 202 Segment Tree Query
 247 Segment Tree Query II
@@ -99,5 +100,6 @@ snowflake id generator: 0(1 bit) + timestamp(41 bits) + datacenter id(5 bits) + 
 207 Interval Sum II
 248 Count of Smaller Number
 249 Count of Smaller Number Before itself249 Count of Smaller Number Before itself
+
 
 ```
