@@ -55,6 +55,23 @@ snowflake id generator: 0(1 bit) + timestamp(41 bits) + datacenter id(5 bits) + 
 
 
 
+# Dynamo: How to Design a Key-value Store
+
+# Cassandra: How to Desing a Wide-column NoSQL Database
+
+# Kafka: How to Design a Distributed Messaging System
+
+# Chubby: How to Design a Distributed Locking Service
+
+# GFS: How to Design a Distributed File Storage System
+
+# HDFS: How to Design a Distributed File Storage System
+
+# BitTable: How to Design a Wide-column Storage System
+
+
+
+
 ```
 5  Kth Largest Element
 461  Kth Smallest Numbers in Unsorted Array
@@ -99,7 +116,27 @@ snowflake id generator: 0(1 bit) + timestamp(41 bits) + datacenter id(5 bits) + 
 206 Interval Sum
 207 Interval Sum II
 248 Count of Smaller Number
-249 Count of Smaller Number Before itself249 Count of Smaller Number Before itself
+249 Count of Smaller Number Before itself
+
+
+575 Decode String
+363 Trapping Rain Water
+12 Min Stack
+360 Sliding Window Median
+364 Trapping Rain Water II
+510 Maximal Rectangle
+126 Max Tree
+122 Largest Rectangle in Histogram
+81 Find Median from Data Stream
+475 Binary Tree Maximum Path Sum II
+370 Convert Expression to Reverse Polish Notation
+369 Convert Expression to Polish Notation
+130 Heapify
+40 Implement Queue by Two Stacks
+623 K Edit Distance
+367 Expression Tree Build
+368 Expression Evaluation
+
 
 
 ```

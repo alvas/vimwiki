@@ -17,15 +17,26 @@ The common file model consists of the following object types:
 * The superblock object
 Stores information concerning a mounted filesystem. For disk-based filesystems, this object usually corresponds to a filesystem control block stored on disk.
 
+superblock{},
+
+
 * The inode object
-Stores general information about a specific file. For disk-based filesystems, this object usually corresponds to a file control block stored on disk. Each inode object is associated with an inode number, which uniquely identifies the file within the filesystem.
+Stores general information about a specific file. For disk-based filesystems, this object usually corresponds to a file control block stored on disk. Each inode{} object is associated with an inode number, which uniquely identifies the file within the filesystem.
+
+All information needed by the filesystem to handle a file is included in a data structure called an inode.
+
+Each inode object duplicates some of the data included in the disk inode.
+
 
 * The file object
 Stores information about the interaction between an open file and a process. This information exists only in kernel memory during the period when a process has the file open.
 
+A file object describes how a process interacts with a file it has opened. The object is created when the file is opened and consists of a file{} structure. File objects have no corresponding image on disk, and hence no "dirty" field is included in the file{} structure to specify that the file object has been modified.
+
+The main information stored in a file object is the file pointer -- the current position in the file from which the next operation will take place. 
+
 * The dentry object
 Stores information about the linking of a directory entry(a particular name of the file) with the corresponding file. Each disk-based filesystem stores this information in its own particular way on disk.
-
 
 The most recently used dentry objects are contained in a disk cache named the dentry cache, which speeds up the translation from a file pathname to the inode of the last pathname component. A disk cache is a software mechanism that allows the kernel to keep in RAM some information that is normally stored on a disk, so that further accesses to that data can be quickly satisfied without a slow access to the disk itself.
 
