@@ -17,7 +17,7 @@ The common file model consists of the following object types:
 * The superblock object
 Stores information concerning a mounted filesystem. For disk-based filesystems, this object usually corresponds to a filesystem control block stored on disk.
 
-superblock{},
+super_block{},
 
 
 * The inode object
@@ -36,11 +36,26 @@ A file object describes how a process interacts with a file it has opened. The o
 The main information stored in a file object is the file pointer -- the current position in the file from which the next operation will take place. 
 
 * The dentry object
+Once a directory entry is read into memory, it is transformed by the VFS into a dentry object based on the dentry structure. The kernel creates a dentry object for every component of a pathname that a process looks up; the dentry object associates the component to its corresponding inode. Notice that dentry objects has no corresponding image on disk, and hence no field is included in the dentry structure to specify that the object has been modified.
+
 Stores information about the linking of a directory entry(a particular name of the file) with the corresponding file. Each disk-based filesystem stores this information in its own particular way on disk.
 
 The most recently used dentry objects are contained in a disk cache named the dentry cache, which speeds up the translation from a file pathname to the inode of the last pathname component. A disk cache is a software mechanism that allows the kernel to keep in RAM some information that is normally stored on a disk, so that further accesses to that data can be quickly satisfied without a slow access to the disk itself.
 
 Disk cache is different from hardware cache or memory cache. A hardware cache is a fast static RAM that speeds up requests directed to the slower dynamic RAM. A memory cache is a software mechanism introduced to bypass the Kernel Memory Allocator.
+
+
+### File Associated with a Process
+
+Each process has its own current working directory and its own root directory. These are only two examples of data that must be maintained by the kernel to represent the interactions between a process and a filesystem. A whole data structure of type fs_struct is used for that purpose, and each process descriptor has an fs field that points to the process fs_struct{} structure.
+
+A second table, whose address is contained in the files field of the process descriptor, specifies which files are currently opened by the process. It is a files_struct{} structure. 
+
+For every file with an entry in the fd array, the array index is the file descriptor. 
+
+### Filesystem Mounting
+
+For each mount operation, the kernel must save in memory the mount point and the mount flags, as well as the relationships between the fielsystem to be mounted and the other mounted filesystems. Such information is stored in a mounted filesystem descriptor of type vfsmount{}. 
 
 
 ### System Calls Handled by the VFS

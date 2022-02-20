@@ -1,3 +1,24 @@
+# OOD
+
+SOLID principles:
+
+* S — Single responsibility principle
+A Class should be responsible for a single task or a class must have a specific purpose.
+
+* O — Open-closed principle
+This principle states that Objects or entities should be open for extension, but closed for modification. This simply means that a class should be easily extendable without modifying the class itself
+ 
+* L — Liskov substitution principle
+Liskov substitution principle says every class that inherit from a parent class, must not replicate functionality already implemented in the parent class.
+Then the parent class should be able to be replaced by any of its subclasses in any region of the code.
+
+* I — Interface segregation principle
+Interface segregation principle states that many specialized interfaces are better than one universal. In other words we can say this also that client must not be forced to implement an interface that it doesn’t use. So the main purpose is to divide the interfaces so that they are more specific.
+
+* D — Dependency Inversion Principle
+Dependency inversion principle states that: 1. High level modules should not depend on low-level modules, both should depend on abstractions. 2. Abstractions should not depend on details. Details should depend on abstractions. Or it can be rephrases as “the dependencies should be based on abstractions, not details.”
+
+
 # latency number
 
 | operation                          | time     |
