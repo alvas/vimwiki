@@ -115,3 +115,14 @@ setxattr(), lsetxattr(), fsetxattr(), getxattr(), lgetxattr(), fgetxattr(), list
 A superblock object consists of a super_block{} structure.
 
 
+
+
+# Accessing Files
+
+## Reading and Writing a File
+
+### Reading from a File
+
+The generic_file_read() function is used to implement the read method for block device files and for regular files of almost all disk-based filesystems. The first descriptor is stored in the local variable local_iov of type iovec; it contains the address(buf) and the length(count) o the User Mode buffer that shall receive the data read from the file. The second descriptor is stored in the local variable kiocb of type kiocb; it is used to keep track of the completion status of an ongoing synchronous or asynchronous I/O operation.
+
+
