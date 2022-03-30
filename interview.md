@@ -159,5 +159,53 @@ snowflake id generator: 0(1 bit) + timestamp(41 bits) + datacenter id(5 bits) + 
 368 Expression Evaluation
 
 
+141 Sqrt
+586 Sqrt(x) II
+183 Wood Cut
+437 Copy Books
+438 Copy Books II
+633 Find the Duplicate Number
+617 Maximum Average Subarray II
+919 Meeting Rooms II
+591 Number of Airplanes in the Sky
+414 Divide Two Integers
+75 Find Peak Element
+390 Find Peak Element II
+362 Sliding Window Maximum
+821 Time Intersection
+74 First Bad Version
+600 Smallest Rectangle Enclosing Black Pixels
+131 The Skyline Problem
+920 Meeting Rooms
+868 Maximum Average Subarray
+
+
+453 Flatten Binary Tree to Linked List
+22 Flatten List
+138 Subarray Sum
+404 Subarray Sum II
+139 Subarray Sum Closest
+405 Submatrix Sum
+404 Subarray Sum II
+406 Minimum Size Subarray Sum
+528 Flatten Nested List Iterator
+399 Nuts & Bolts Problem
+402 Continuous Subarray Sum
+403 Continuous Subarray Sum II
+400 Maximum Gap
+401 Kth Smallest Number in Sorted Matrix
+75 Find Peak Element
+588 Sliding Window Matrix Maximum
+86 Binary Search Tree Iterator
+551 Nested List Weight Sum
+601 Flatten 2D Vector
+553 Bomb Enemy
+541 Zigzag Iterator II
+540 Zigzag iterator
+574 Build Post Office
+573 Build Post Office II
+390 Find Peak Eelement II
+
+
 
 ```
