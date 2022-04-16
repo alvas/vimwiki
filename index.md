@@ -1,4 +1,4 @@
-# Note
+[#](#.md) Note
 
 ## [linux](linux.md)
 
@@ -19,6 +19,8 @@
 ## [interview](interview.md)
 
 ## [database](database.md)
+
+## [video_cpature](video_capture.md)
 
 ## [greetings](greetings.md)
 
