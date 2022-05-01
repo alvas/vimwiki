@@ -1,6 +1,6 @@
 [#](#.md) The H.264 Advanced Video Compression Standard
 
-Video Usability Information(VUI)
+Quarter Common Intermediate Format(QCIF)
 
 Scalable Video Coding(SVC)
 
@@ -103,7 +103,7 @@ picture: a frame or a field
 Picture Order Count(POC)
 
 Supplement Enhancementn Information(SEI)
- mo
+
 5.3.4.1 Coding pictures in frame or field mode
 
 Picture Adaptive Frame Field Codinng(PAFF)
@@ -156,4 +156,75 @@ context adaptive variable length codes(CAVLC)
 
 connext adaptive binary arithmetic coding(CABAC)
 
+## H.264 conformance, transport and licensing
+
+Supplemental Enhancement Information(SEI)
+
+Video Usability Information(VUI)
+
+8.2 Conforming to the Standard
+
+The profile places algorithmic constraints on the decoder, determing which decoding tools the decoder should be capable of handling.
+
+The level places data processing and storage constraints on the decoder, determining how much data the decoder should be capable of storing, procesing and outputting to a display.
+
+8.6 Licensing H.264/AVC
+
+Hypothetical Reference Decoder(HRD)
+
+8.3.2 Arbitrary Slice Order(ASO)
+
+8.3.3 Slice Groups/Flexible Macroblock Order(FMO)
+
+8.4.2 Transport protocols
+
+Packetized elementary stream(PES)
+
+Real-Time Protocol(RTP)
+
+8.5 Supplement Informtion
+
+Supplement Enhancement Information(SEI)
+
+Video Usability Information(VUI)
+
+## H.264 performance
+
+9.5.1 Rate Distortion Optimized mode selection
+
+Rate Distortion Optimized(RDO)
+
+Sum of Squared Distortion(SSD)
+
+Sum of Absolute Differences(SAD)
+
+Sum of Absolute Transformed Differences(SATD)
+
+## Extensions and directions
+
+10.1 Introduction
+
+Scalable Video Coding(SVC)
+
+Multiview Video Coding(MVC)
+
+Reconfigurable Video Coding(RVC)
+
+Fully Configurable Video Coding(FCVC)
+
+10.2.9 Quality scalability in detail
+
+Coarse Grain Quality Scalability(CGS)
+
+Medium Grain Quality Scalability(MGS)
+
+10.4.1 MPEG Reconfigurable Video Coding
+
+Functional Units(FUs)
+
+Video Tool Library(VTL)
+
+10.4.2 Fully Configurable Video Coding(FCVC)
+
+Universal Video Decoder(UVD)
 
