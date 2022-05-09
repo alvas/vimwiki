@@ -124,6 +124,16 @@ Motion vector differences(mvd)
 
 ## H.264 Prediction
 
++ intra prediction
++ inter prediction using motion compensated prediction from previously coded frames
++ multiple prediction block sizes
++ multiple reference frames
++ special modes, Direct/Weighted prediction
++ sub-pixel interpolation
++ built-in filter to reduce compression artefacts
+
+6.2 Macroblock prediction
+
 6.3.1 4x4 luma prediction modes
 
 Sum of Absolute Errors(SAE)
