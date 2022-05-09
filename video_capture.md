@@ -45,6 +45,10 @@ B = Y + 1.772Cb
 
 Common Intermediate Format(CIF)
 
+2.6.2 Objective quality measurement
+
+Peak Signal to Noice Ratio(PSNR)
+
 ## 3 Video coding concepts
 
 The goal of the prediction model is to reduce redundancy by forming a prediction of the data and subtracting this prediction from the current data. 
@@ -160,7 +164,7 @@ Group of Pictures(GOP)
 
 transform: converting a block of image samples into a different domain
 
-quanntization: reducing the precision of transform coefficients
+quantization: reducing the precision of transform coefficients
 
 context adaptive variable length codes(CAVLC)
 
@@ -236,5 +240,5 @@ Video Tool Library(VTL)
 
 10.4.2 Fully Configurable Video Coding(FCVC)
 
-Universal Video Decoder(UVD)
+Uniiversal Video Decoder(UVD)
 
