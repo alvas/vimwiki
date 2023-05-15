@@ -22,5 +22,7 @@
 
 ## [video_cpature](video_capture.md)
 
+## [MediaFoundation](MediaFoundation.md)
+
 ## [greetings](greetings.md)
 
